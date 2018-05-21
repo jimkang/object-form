@@ -28,7 +28,7 @@ Given HTML like this:
         <li contenteditable data-of"happening/array|emitters">Lu Chi Shen</li>
       </ul>
       <h4>Action</h4>
-      <input data-of="happening/action" type="text">Kill</input>
+      <input data-of="happening/action" type="text" value`"Kill"></input>
       <h4>Receivers</h4>
       <ul>
         <li contenteditable data-of"happening/array|receivers">The Raw Iron Priest</li>
@@ -41,7 +41,7 @@ Given HTML like this:
 JS like this:
 
     var of = require('object-form');
-    console.log(of({
+    console.log(of.objectFromDOM({
       hierarchyAttribute: 'data-of', // This is the default. You don't have to specify it.
       getValueFromElement: (el, hierarchyAttribute) => el.value || el.textContent, // This is the default. You don't have to specify this.
       domRoot: window.document.getElementById('the-form') // This can be any object that implements querySelector and querySelectorAll, just meaning that it returns an object for a string.
