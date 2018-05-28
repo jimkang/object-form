@@ -3,6 +3,8 @@ object-form
 
 Given an object, set corresponding form values (or any DOM element values). Or given a root DOM element (which could be a form), put together an object.
 
+Currently not implemented: Setting values. Only extracting values from the DOM to an object is done.
+
 Installation
 ------------
 
@@ -15,24 +17,51 @@ Given HTML like this:
 
     <form id="the-form">
       <input data-of="beatName" type="text" value="The Raw Iron Temple"></input>
-      <input data-of="beatSeq" type="number" value="23"></input>
+      <input data-of="beatSeq" data-oftype="int" type="number" value="23"></input>
       <ul>
-        <li contenteditable data-of="array|chars">Lu Chi Shen</li>
-        <li contenteditable data-of="array|chars">The Raw Iron Priest</li>
-        <li contenteditable data-of="array|chars">Priest's lackey</li>
+        <li contenteditable data-of="chars" data-oftype="array">Lu Chi Shen</li>
+        <li contenteditable data-of="chars" data-oftype="array">The Raw Iron Priest</li>
+        <li contenteditable data-of="chars" data-oftype="array">Priest's lackey</li>
       </ul>
 
       <h3>The happening</h3>
       <h4>Emitters</h4>
       <ul>
-        <li contenteditable data-of"happening/array|emitters">Lu Chi Shen</li>
+        <li contenteditable data-of="happening/emitters" data-oftype="array">Lu Chi Shen</li>
       </ul>
       <h4>Action</h4>
-      <input data-of="happening/action" type="text" value`"Kill"></input>
+      <div data-of="happening/action" type="text" contenteditable>Kill</div>
       <h4>Receivers</h4>
       <ul>
-        <li contenteditable data-of"happening/array|receivers">The Raw Iron Priest</li>
-        <li contenteditable data-of"happening/array|receivers">Priest's lackey</li>
+        <li contenteditable data-of="happening/receivers" data-oftype="array">The Raw Iron Priest</li>
+        <li contenteditable data-of="happening/receivers" data-oftype="array">Priest's lackey</li>
+      </ul>
+
+      <button id="submit-beat-button">Save</button>
+    </form>
+    </body>`,
+    unfilledHTML: `<body>
+
+    <form id="the-form">
+      <input data-of="beatName" type="text" value=""></input>
+      <input data-of="beatSeq" type="number" value=""></input>
+      <ul>
+        <li contenteditable data-of="chars" data-oftype="array"></li>
+        <li contenteditable data-of="chars" data-oftype="array"></li>
+        <li contenteditable data-of="chars" data-oftype="array"></li>
+      </ul>
+
+      <h3>The happening</h3>
+      <h4>Emitters</h4>
+      <ul>
+        <li contenteditable data-of="happening/emitters" data-oftype="array"></li>
+      </ul>
+      <h4>Action</h4>
+      <input data-of="happening/action" type="text"></input>
+      <h4>Receivers</h4>
+      <ul>
+        <li contenteditable data-of="happening|receivers" data-oftype="array"></li>
+        <li contenteditable data-of="happening|receivers" data-oftype="array"></li>
       </ul>
 
       <button id="submit-beat-button">Save</button>
@@ -41,11 +70,12 @@ Given HTML like this:
 JS like this:
 
     var of = require('object-form');
-    console.log(of.objectFromDOM({
+    var objectFromDOM = of.ObjectFromDOM({
       hierarchyAttribute: 'data-of', // This is the default. You don't have to specify it.
-      getValueFromElement: (el, hierarchyAttribute) => el.value || el.textContent, // This is the default. You don't have to specify this.
-      domRoot: window.document.getElementById('the-form') // This can be any object that implements querySelector and querySelectorAll, just meaning that it returns an object for a string.
+      getValueFromElement: (el, hierarchyAttribute) => el.value || el.textContent // This is the default. You don't have to specify this.
     });
+    console.log(objectFromDOM(window.document.getElementById('the-form') // This can be any object that implements querySelector and querySelectorAll, just meaning that it returns an object for a string.
+    );
       
 Will log:
 
@@ -72,6 +102,13 @@ Will log:
 And you can post that to an API or something.
 
 It doesn't do any rendering. That's all up to you.
+
+Tests
+-----
+
+Tests are run in your local Firefox and Chrome via [smokestack](https://npmjs.com/package/smokestack).
+
+Run them with `make test`.
 
 License
 -------

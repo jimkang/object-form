@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/jimkang/object-form",
   "devDependencies": {
+    "browserify": "^16.2.2",
+    "smokestack": "^3.4.1",
+    "tap-closer": "^1.0.0",
+    "tape": "^4.9.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
