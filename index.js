@@ -22,7 +22,12 @@ function ObjectFromDOM({
         let segment = path[j];
         if (j === path.length - 1) {
           // This is the last path segment, so assign the value here.
-          assignValueToObject(subObject, segment, ofType, getValueFromElement(formEl));
+          assignValueToObject(
+            subObject,
+            segment,
+            ofType,
+            getValueFromElement(formEl)
+          );
         } else {
           if (subObject[segment]) {
             subObject = subObject[segment];
@@ -54,10 +59,13 @@ function ObjectFromDOM({
 }
 
 function defaultGetValueFromElement(el) {
-  return el.value || el.textContent;
+  if (el.type === 'checkbox') {
+    return el.checked;
+  } else {
+    return el.value || el.textContent;
+  }
 }
 
 module.exports = {
   ObjectFromDOM
 };
-

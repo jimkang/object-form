@@ -27,6 +27,12 @@ var testCases = [
         <li contenteditable data-of="happening/receivers" data-oftype="array">The Raw Iron Priest</li>
         <li contenteditable data-of="happening/receivers" data-oftype="array">Priest's lackey</li>
       </ul>
+      
+      <h4>All done</h4>
+      <input type="checkbox" data-of="alldone" checked>
+
+      <h4>Public</h4>
+      <input type="checkbox" data-of="public">
 
       <button id="submit-beat-button">Save</button>
     </form>
@@ -66,7 +72,9 @@ var testCases = [
         emitters: ['Lu Chi Shen'],
         action: 'Kill',
         receivers: ['The Raw Iron Priest', "Priest's lackey"]
-      }
+      },
+      alldone: true,
+      public: false
     }
   }
 ];
