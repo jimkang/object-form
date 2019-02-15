@@ -1,6 +1,6 @@
 {
   "name": "object-form",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Given an object, set corresponding form values (or any DOM element values). Or given a root DOM element (which could be a form), put together an object.",
   "main": "index.js",
   "scripts": {
