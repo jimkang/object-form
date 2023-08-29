@@ -61,7 +61,7 @@ function ObjectFromDOM({
 function defaultGetValueFromElement(el) {
   if (el.type === 'checkbox') {
     return el.checked;
-  } else if (el.type === 'select') {
+  } else if (el.type === 'select-one') {
     let options = el.selectedOptions;
     if (options.length < 1) {
       return;
@@ -69,7 +69,8 @@ function defaultGetValueFromElement(el) {
     if (options.length === 1) {
       return options[0].value;
     }
-
+  } else if (el.type === 'select-multiple') {
+    let options = el.selectedOptions;
     let values = [];
     for (let i = 0; i < options.length; ++i) {
       values.push(options[i].value);
