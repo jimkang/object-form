@@ -34,6 +34,12 @@ var testCases = [
       <h4>Public</h4>
       <input type="checkbox" data-of="public">
 
+      <select data-of="food">
+        <option value="catty of meat">Catty of Meat</option>
+        <option value="vegetable dinner" selected>Vegetable Dinner</option>
+        <option value="bowl of wine">Bowl of Wine</option>
+      </select>
+
       <button id="submit-beat-button">Save</button>
     </form>
     </body>`,
@@ -74,7 +80,8 @@ var testCases = [
         receivers: ['The Raw Iron Priest', "Priest's lackey"]
       },
       alldone: true,
-      public: false
+      public: false,
+      food: 'vegetable dinner'
     }
   }
 ];
